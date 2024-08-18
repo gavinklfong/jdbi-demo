@@ -5,7 +5,7 @@ import lombok.Value;
 import java.util.Set;
 
 @Value
-public class ReservationOrder {
+public class Reservation {
     String id;
     String customerId;
     String showId;
