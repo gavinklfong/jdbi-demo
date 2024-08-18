@@ -1,0 +1,6 @@
+spring:
+  application.name: demo
+  datasource:
+    url: jdbc:mysql://localhost:3036
+    username: ...
+    password: ...
