@@ -6,17 +6,12 @@ import lombok.extern.slf4j.Slf4j;
 import org.jdbi.v3.core.Jdbi;
 import org.jdbi.v3.core.locator.ClasspathSqlLocator;
 import org.jdbi.v3.core.statement.SqlStatements;
-import org.jdbi.v3.testing.junit5.JdbiExtension;
 import org.jdbi.v3.testing.junit5.JdbiH2Extension;
-import org.jdbi.v3.testing.junit5.tc.JdbiTestcontainersExtension;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.junit.jupiter.api.extension.RegisterExtension;
-import org.testcontainers.containers.MySQLContainer;
-import org.testcontainers.junit.jupiter.Container;
-import org.testcontainers.junit.jupiter.Testcontainers;
 
+import java.util.List;
 import java.util.Set;
 
 @Slf4j
@@ -42,7 +37,8 @@ class TheatreShowDaoH2Test {
 
     @Test
     void queryTest() {
-        Set<Show> results = theatreShowDao.searchShowByName("The Lion King");
+        List<Show> results = theatreShowDao.searchShowByName("The Lion King");
+        results.forEach(show -> log.info("{}", show));
 
     }
 

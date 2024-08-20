@@ -6,7 +6,8 @@ import java.math.BigDecimal;
 
 @Value
 public class Seat {
-    String id;
+    String showId;
+    String seatId;
     String region;
     BookingStatus status;
     String reservationRef;
