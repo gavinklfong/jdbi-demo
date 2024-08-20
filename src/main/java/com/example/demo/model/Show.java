@@ -9,7 +9,7 @@ import java.util.Set;
 @Value
 public class Show {
     String id;
-    Theatre theatre;
+    String location;
     LocalDateTime startTime;
     Set<Seat> seats;
     Duration duration;

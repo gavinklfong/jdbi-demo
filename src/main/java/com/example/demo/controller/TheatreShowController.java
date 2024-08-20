@@ -1,13 +1,12 @@
 package com.example.demo.controller;
 
+import com.example.demo.dto.ReservationRequest;
+import com.example.demo.dto.ReservationResponse;
 import com.example.demo.model.Reservation;
-import com.example.demo.model.Seat;
 import com.example.demo.model.Show;
 import com.example.demo.service.TheatreShowService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Set;
 
@@ -17,24 +16,19 @@ public class TheatreShowController {
 
     private final TheatreShowService theatreShowService;
 
-    @GetMapping("/theatres/{}/shows")
-    public Set<Show> findShowByTheatre(String theatre) {
-        return null;
+    @GetMapping("/shows")
+    public Set<Show> findShows(@RequestParam String name) {
+        return theatreShowService.findShowsByName(name);
     }
 
-    @GetMapping("/theatres/{}/shows/{}")
-    public Show findShowByTheatreAndShow(String theatre, String show) {
-        return null;
+    @GetMapping("/shows/{id}")
+    public Show findShowById(@PathVariable String id) {
+        return theatreShowService.findShowById(id);
     }
 
-    @GetMapping("/theatres/{}/shows/{}/seats")
-    public Set<Seat> findSeats(String theatre, String show) {
-        return null;
-    }
-
-    @PostMapping("/theatres/{}/shows/{}/reservation")
-    public Reservation reserveSeats(String theatre, String show) {
-        return null;
+    @PostMapping("/shows/{id}/reservation")
+    public ReservationResponse reserveSeats(@PathVariable String id, @RequestBody ReservationRequest reservationRequest) {
+        return theatreShowService.reserveSeats(id, reservationRequest);
     }
 
 }

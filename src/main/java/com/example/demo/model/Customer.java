@@ -3,7 +3,9 @@ package com.example.demo.model;
 import lombok.Value;
 
 @Value
-public class Theatre {
+public class Customer {
     String id;
-    String location;
+    String name;
+    String email;
+    Integer tier;
 }

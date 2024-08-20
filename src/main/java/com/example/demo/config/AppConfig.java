@@ -1,9 +1,14 @@
 package com.example.demo.config;
 
+import org.jdbi.v3.core.Jdbi;
+import org.springframework.context.annotation.Bean;
+
+import javax.sql.DataSource;
+
 public class AppConfig {
 
     @Bean
-    public Jdbi jdbc(Datasource ds) {
-        return Jdbc.create(ds);
+    public Jdbi jdbi(DataSource ds) {
+        return Jdbi.create(ds);
     }
 }
