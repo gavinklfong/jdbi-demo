@@ -11,6 +11,7 @@ import java.util.Set;
 @Value
 public class Show {
     String id;
+    String name;
     String location;
     LocalDateTime startTime;
     Duration duration;

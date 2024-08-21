@@ -20,7 +20,7 @@ INSERT INTO seat (show_id, seat_id, region, status, price, reservation_id) VALUE
 ('1f79dd0c-0b29-4777-90f4-c86dbf0ba7f8', 'ZF45',  'Rear', 'AVAILABLE', 62.75, null),
 ('1f79dd0c-0b29-4777-90f4-c86dbf0ba7f8', 'ZF46',  'Rear', 'AVAILABLE', 62.75, null),
 ('1f79dd0c-0b29-4777-90f4-c86dbf0ba7f8', 'ZE3',  'Side', 'AVAILABLE', 62.75, null),
-('1f79dd0c-0b29-4777-90f4-c86dbf0ba7f8', 'ZE4',  'Side', 'AVAILABLE', 82.75, null),
+('1f79dd0c-0b29-4777-90f4-c86dbf0ba7f8', 'ZE4',  'Side', 'CLOSED', 82.75, null),
 ('1f79dd0c-0b29-4777-90f4-c86dbf0ba7f8', 'ZE5',  'Side', 'AVAILABLE', 82.75, null),
 ('1f79dd0c-0b29-4777-90f4-c86dbf0ba7f8', 'ZE6',  'Side', 'AVAILABLE', 82.75, null),
 ('1f79dd0c-0b29-4777-90f4-c86dbf0ba7f8', 'F24',  'Front', 'AVAILABLE', 202.75, null),
