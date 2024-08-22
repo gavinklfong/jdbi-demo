@@ -2,7 +2,7 @@ package com.example.demo.dao;
 
 import com.example.demo.model.Reservation;
 import com.example.demo.model.Seat;
-import com.example.demo.model.Show;
+import com.example.demo.model.TheatreShow;
 import lombok.RequiredArgsConstructor;
 import org.jdbi.v3.core.Jdbi;
 import org.springframework.stereotype.Component;
@@ -51,7 +51,7 @@ public class TheatreShowDao {
     private final ShowRowMapper showRowMapper;
     private final ReservationRowMapper reservationRowMapper;
 
-    public List<Show> searchShowByName(String name) {
+    public List<TheatreShow> searchShowByName(String name) {
         return jdbi.withHandle(handle ->
             handle.createQuery(SEARCH_SHOW_BY_NAME)
                     .bind("name", name + "%")
@@ -60,7 +60,7 @@ public class TheatreShowDao {
         );
     }
 
-    public Optional<Show> getShowById(String showId) {
+    public Optional<TheatreShow> getShowById(String showId) {
         return jdbi.withHandle(handle ->
                 handle.createQuery(GET_SHOW_BY_ID)
                         .bind("showId", showId)

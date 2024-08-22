@@ -1,6 +1,6 @@
 package com.example.demo.dao;
 
-import com.example.demo.model.Show;
+import com.example.demo.model.TheatreShow;
 import org.jdbi.v3.core.mapper.RowMapper;
 import org.jdbi.v3.core.statement.StatementContext;
 import org.springframework.stereotype.Component;
@@ -10,10 +10,10 @@ import java.sql.SQLException;
 import java.time.Duration;
 
 @Component
-public class ShowRowMapper implements RowMapper<Show> {
+public class ShowRowMapper implements RowMapper<TheatreShow> {
     @Override
-    public Show map(ResultSet rs, StatementContext ctx) throws SQLException {
-        return Show.builder()
+    public TheatreShow map(ResultSet rs, StatementContext ctx) throws SQLException {
+        return TheatreShow.builder()
                 .id(rs.getString("id"))
                 .name(rs.getString("name"))
                 .duration(Duration.ofMinutes(rs.getInt("duration_in_mins")))

@@ -3,16 +3,15 @@ package com.example.demo.dao;
 
 import com.example.demo.model.Reservation;
 import com.example.demo.model.Seat;
-import com.example.demo.model.Show;
+import com.example.demo.model.TheatreShow;
+import lombok.extern.slf4j.Slf4j;
 import org.jdbi.v3.core.Jdbi;
 import org.jdbi.v3.core.locator.ClasspathSqlLocator;
 import org.jdbi.v3.core.statement.SqlStatements;
+import org.jdbi.v3.testing.junit5.JdbiH2Extension;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.testcontainers.containers.MySQLContainer;
-import org.testcontainers.junit.jupiter.Container;
-import org.testcontainers.junit.jupiter.Testcontainers;
-import org.testcontainers.utility.DockerImageName;
+import org.junit.jupiter.api.extension.ExtendWith;
 
 import java.math.BigDecimal;
 import java.time.Duration;
@@ -25,23 +24,18 @@ import static com.example.demo.util.DbTestUtil.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-@Testcontainers
-class TheatreShowDaoMySQLTest {
+@Slf4j
+@ExtendWith(JdbiH2Extension.class)
+class TheatreTheatreShowDaoH2Test {
 
     private static final String SHOW_ID = "1f79dd0c-0b29-4777-90f4-c86dbf0ba7f8";
     private static final String NEW_RESERVATION_ID = "6e1becbd-6acf-453f-a37e-1d2b5a17800b";
     private static final String CUSTOMER_ID = "5e9d267a-84cb-4317-bf75-1ce69d425455";
 
-    @Container
-    private static final MySQLContainer<?> MYSQL_CONTAINER = new MySQLContainer<>(
-            DockerImageName.parse("mysql").withTag("latest"));
-
-    private final Jdbi jdbi = Jdbi.create(MYSQL_CONTAINER.getJdbcUrl(), MYSQL_CONTAINER.getUsername(), MYSQL_CONTAINER.getPassword());
-
     private TheatreShowDao theatreShowDao;
 
     @BeforeEach
-    void setup() {
+    void setup(Jdbi jdbi) {
         jdbi.useHandle(h -> {
             h.getConfig(SqlStatements.class).setScriptStatementsNeedSemicolon(false);
             h.createScript(ClasspathSqlLocator.removingComments()
@@ -57,7 +51,7 @@ class TheatreShowDaoMySQLTest {
 
     @Test
     void givenShowExist_testSearchShowByName() {
-        List<Show> results = theatreShowDao.searchShowByName("The Lion King");
+        List<TheatreShow> results = theatreShowDao.searchShowByName("The Lion King");
         assertThat(results).hasSize(3)
                 .extracting("name")
                 .contains("The Lion King");
@@ -65,9 +59,9 @@ class TheatreShowDaoMySQLTest {
 
     @Test
     void givenShowExist_testGetShowById() {
-        Optional<Show> result = theatreShowDao.getShowById(SHOW_ID);
+        Optional<TheatreShow> result = theatreShowDao.getShowById(SHOW_ID);
         assertThat(result).isNotEmpty()
-                .contains(Show.builder()
+                .contains(TheatreShow.builder()
                         .id(SHOW_ID)
                         .name("Wicked")
                         .location("Apollo Victoria Theatre")
@@ -78,7 +72,7 @@ class TheatreShowDaoMySQLTest {
 
     @Test
     void givenShowNotExist_testGetShowById() {
-        Optional<Show> result = theatreShowDao.getShowById("non-existing-show");
+        Optional<TheatreShow> result = theatreShowDao.getShowById("non-existing-show");
         assertThat(result).isEmpty();
     }
 
@@ -96,7 +90,7 @@ class TheatreShowDaoMySQLTest {
     }
 
     @Test
-    void testInsertReservation() {
+    void testInsertReservation(Jdbi jdbi) {
         Reservation reservation = buildReservation();
         int count = theatreShowDao.insertReservation(reservation);
         assertThat(count).isEqualTo(1);
@@ -105,7 +99,7 @@ class TheatreShowDaoMySQLTest {
     }
 
     @Test
-    void givenAvailableSeats_testReserveSeats() {
+    void givenAvailableSeats_testReserveSeats(Jdbi jdbi) {
         // insert reservation
         Reservation reservation = buildReservation();
         theatreShowDao.insertReservation(reservation);
@@ -132,7 +126,7 @@ class TheatreShowDaoMySQLTest {
     }
 
     @Test
-    void givenSeatAvailable_createReservationAndReserveSeats() {
+    void givenSeatAvailable_createReservationAndReserveSeats(Jdbi jdbi) {
 
         Reservation reservation = buildReservation();
 
@@ -144,7 +138,7 @@ class TheatreShowDaoMySQLTest {
     }
 
     @Test
-    void givenSomeSeatsNotAvailable_createReservationAndReserveSeats() {
+    void givenSomeSeatsNotAvailable_createReservationAndReserveSeats(Jdbi jdbi) {
 
         Reservation reservation = buildReservation();
 
@@ -164,5 +158,4 @@ class TheatreShowDaoMySQLTest {
                 .totalPrice(new BigDecimal("1500"))
                 .build();
     }
-
 }

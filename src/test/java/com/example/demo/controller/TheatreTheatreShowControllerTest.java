@@ -20,7 +20,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureMockMvc
-class TheatreShowControllerTest {
+class TheatreTheatreShowControllerTest {
 
     private static final String SHOW_ID = "1f79dd0c-0b29-4777-90f4-c86dbf0ba7f8";
     private static final String CUSTOMER_ID = "5e9d267a-84cb-4317-bf75-1ce69d425455";

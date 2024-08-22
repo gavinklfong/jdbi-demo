@@ -4,7 +4,7 @@ package com.example.demo.service;
 import com.example.demo.dto.ReservationRequest;
 import com.example.demo.dto.ReservationResponse;
 import com.example.demo.model.BookingStatus;
-import com.example.demo.model.Show;
+import com.example.demo.model.TheatreShow;
 import lombok.extern.slf4j.Slf4j;
 import org.jdbi.v3.core.Jdbi;
 import org.jdbi.v3.core.locator.ClasspathSqlLocator;
@@ -23,7 +23,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 @Slf4j
 @SpringBootTest
-class TheatreShowServiceTest {
+class TheatreTheatreShowServiceTest {
 
     private static final String SHOW_ID = "1f79dd0c-0b29-4777-90f4-c86dbf0ba7f8";
     private static final String CUSTOMER_ID = "4b7cd538-1f31-416d-9874-6c543f183d72";
@@ -49,8 +49,8 @@ class TheatreShowServiceTest {
 
     @Test
     void testGetShowsByName() {
-        List<Show> shows = theatreShowService.findShowsByName("Wicked");
-        assertThat(shows).hasSize(2);
+        List<TheatreShow> theatreShows = theatreShowService.findShowsByName("Wicked");
+        assertThat(theatreShows).hasSize(2);
     }
 
     @Test

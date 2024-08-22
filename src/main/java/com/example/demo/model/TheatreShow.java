@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 
 @Builder
 @Value
-public class Show {
+public class TheatreShow {
     String id;
     String name;
     String location;

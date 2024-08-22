@@ -5,7 +5,7 @@ import com.example.demo.dto.ReservationRequest;
 import com.example.demo.dto.ReservationResponse;
 import com.example.demo.model.Reservation;
 import com.example.demo.model.Seat;
-import com.example.demo.model.Show;
+import com.example.demo.model.TheatreShow;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,11 +22,11 @@ public class TheatreShowService {
 
     private final TheatreShowDao theatreShowDao;
 
-    public List<Show> findShowsByName(String showName) {
+    public List<TheatreShow> findShowsByName(String showName) {
         return theatreShowDao.searchShowByName(showName);
     }
 
-    public Optional<Show> findShowById(String showId) {
+    public Optional<TheatreShow> findShowById(String showId) {
         return theatreShowDao.getShowById(showId);
     }
 
