@@ -2,13 +2,12 @@ package com.example.demo.controller;
 
 import com.example.demo.dto.ReservationRequest;
 import com.example.demo.dto.ReservationResponse;
-import com.example.demo.model.Reservation;
 import com.example.demo.model.Show;
 import com.example.demo.service.TheatreShowService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Set;
+import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
@@ -17,13 +16,13 @@ public class TheatreShowController {
     private final TheatreShowService theatreShowService;
 
     @GetMapping("/shows")
-    public Set<Show> findShows(@RequestParam String name) {
+    public List<Show> findShows(@RequestParam String name) {
         return theatreShowService.findShowsByName(name);
     }
 
     @GetMapping("/shows/{id}")
     public Show findShowById(@PathVariable String id) {
-        return theatreShowService.findShowById(id);
+        return theatreShowService.findShowById(id).orElseThrow();
     }
 
     @PostMapping("/shows/{id}/reservation")

@@ -13,7 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Set;
+import java.util.Optional;
 import java.util.UUID;
 
 @RequiredArgsConstructor
@@ -22,12 +22,12 @@ public class TheatreShowService {
 
     private final TheatreShowDao theatreShowDao;
 
-    public Set<Show> findShowsByName(String showName) {
-        return null;
+    public List<Show> findShowsByName(String showName) {
+        return theatreShowDao.searchShowByName(showName);
     }
 
-    public Show findShowById(String showId) {
-        return null;
+    public Optional<Show> findShowById(String showId) {
+        return theatreShowDao.getShowById(showId);
     }
 
     @Transactional
@@ -44,9 +44,11 @@ public class TheatreShowService {
                 .reservationTime(LocalDateTime.now())
                 .build();
 
-        theatreShowDao.insertReservation(reservation);
+        int reservationCount = theatreShowDao.insertReservation(reservation);
+        if (reservationCount != 1) throw new RuntimeException("fail to create reservation");
 
-        theatreShowDao.reserveSeats(showId, reservationRequest.getSeatIds(), reservation.getId());
+        int reservedSeatCount = theatreShowDao.reserveSeats(showId, reservationRequest.getSeatIds(), reservation.getId());
+        if (reservedSeatCount < reservationRequest.getSeatIds().size()) throw new RuntimeException("fail to reserve seats");
 
         return ReservationResponse.builder()
                 .reservationId(reservation.getId())

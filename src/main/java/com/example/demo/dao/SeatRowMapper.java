@@ -2,14 +2,12 @@ package com.example.demo.dao;
 
 import com.example.demo.model.BookingStatus;
 import com.example.demo.model.Seat;
-import com.example.demo.model.Show;
 import org.jdbi.v3.core.mapper.RowMapper;
 import org.jdbi.v3.core.statement.StatementContext;
 import org.springframework.stereotype.Component;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.Duration;
 
 @Component
 public class SeatRowMapper implements RowMapper<Seat> {

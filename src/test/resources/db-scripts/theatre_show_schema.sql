@@ -1,3 +1,8 @@
+DROP TABLE IF EXISTS theatre_show;
+DROP TABLE IF EXISTS seat;
+DROP TABLE IF EXISTS reservation;
+DROP TABLE IF EXISTS customer;
+
 CREATE TABLE theatre_show (
 	id varchar(256),
 	name varchar(256),
