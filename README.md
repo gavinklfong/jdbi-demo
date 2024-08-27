@@ -1,8 +1,8 @@
 # JDBI Demo
 
-This repository demonstrates the usage of [JDBI librar](https://jdbi.org/). The library fills in the gap between 
+This repository demonstrates the usage of [JDBI library](https://jdbi.org/). The library fills in the gap between 
 the full-fledged ORM frameworks and the low level JDBC library. A good candidate if you are looking for database
-access with more control on the SQL queries with autom resource management.
+access with more control on the SQL queries with auto resource management.
 
 ## Basic CRUD operations
 
